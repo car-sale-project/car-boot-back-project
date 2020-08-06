@@ -88,7 +88,7 @@
     <!--    通过姓名查询用户-->
     <select id="queryByName" resultMap="UserMap" parameterType="String">
         select
-            userId, userName, userSex, userImg, delTag
+            userId, userName, password, userSex, userImg, delTag
         from elm.user
         where userName = #{username}
     </select>
