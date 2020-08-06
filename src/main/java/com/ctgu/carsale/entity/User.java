@@ -1,5 +1,4 @@
 package com.ctgu.carsale.entity;
-
 import java.io.Serializable;
 
 /**

@@ -3,6 +3,7 @@ package com.ctgu.carsale.controller;
 import com.ctgu.carsale.entity.JsonBean;
 import com.ctgu.carsale.entity.User;
 import com.ctgu.carsale.service.UserService;
+import com.fasterxml.jackson.databind.util.JSONPObject;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -34,23 +35,35 @@ public class UserController {
         return this.userService.queryById(id);
     }
 
+    @RequestMapping("test")
+    public String getData() {
+        return "Hello";
+    }
+
+    @RequestMapping("test1")
+    public void getData(String username) {
+        System.out.println(username);
+    }
+
     /**
      * 登录
      *
-     * @param username password
+     * @param user 用户实例
      * @return JsonBean
      */
-    @PostMapping("login.do")
-    public JsonBean login(@RequestParam("username") String username,
-                          @RequestParam("password") String password , HttpSession session){
+    @RequestMapping("login")
+    public JsonBean login(User user, HttpSession session){
+        System.out.println(user.getUsername());
         JsonBean jsonBean = new JsonBean();
+        String username = user.getUsername();
+        String password = user.getPassword();
         if(username == null || password == null ||
                 username.isEmpty() || password.isEmpty()){
             jsonBean.setStatus(-1);
             jsonBean.setMsg("用户名或密码为空，请重新输入");
             return jsonBean;
         }
-        User user = this.userService.queryByName(username);
+        User user1 = this.userService.queryByName(username);
         if(user == null){
             jsonBean.setStatus(-1);
             jsonBean.setMsg("该用户未注册");
@@ -65,7 +78,9 @@ public class UserController {
         jsonBean.setStatus(0);
         jsonBean.setObj(user);
         jsonBean.setMsg("登录成功");
+        System.out.println("登录成功");
         return jsonBean;
+
     }
 
     /**
@@ -77,8 +92,12 @@ public class UserController {
     @PostMapping("register.do")
     public JsonBean register(@ModelAttribute User user){
         JsonBean jsonBean = new JsonBean();
-
-
+        User user1 = this.userService.queryByName(user.getUsername());
+        if(user1 == null){
+            jsonBean.setStatus(-1);
+            jsonBean.setMsg("用户名已注册");
+            return jsonBean;
+        }
 
         return jsonBean;
     }
