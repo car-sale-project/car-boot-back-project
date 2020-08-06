@@ -67,4 +67,19 @@ public class UserController {
         jsonBean.setMsg("登录成功");
         return jsonBean;
     }
+
+    /**
+     * 注册
+     *
+     * @param user 用户对象
+     * @return JsonBean
+     */
+    @PostMapping("register.do")
+    public JsonBean register(@ModelAttribute User user){
+        JsonBean jsonBean = new JsonBean();
+
+
+
+        return jsonBean;
+    }
 }

@@ -58,8 +58,8 @@ public interface UserService {
     /**
      * 通过姓名查询用户
      *
-     * @param username
-     * @return 影响行数
+     * @param username 用户名
+     * @return 实例对象
      */
     User queryByName(String username);
 }
