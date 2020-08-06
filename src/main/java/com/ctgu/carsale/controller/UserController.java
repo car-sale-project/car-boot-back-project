@@ -53,7 +53,7 @@ public class UserController {
      */
     @RequestMapping("login")
     public JsonBean login(User user, HttpSession session){
-        System.out.println(user.getUsername());
+        System.out.println(user.getUsername()+" "+user.getPassword());
         JsonBean jsonBean = new JsonBean();
         String username = user.getUsername();
         String password = user.getPassword();
@@ -64,19 +64,18 @@ public class UserController {
             return jsonBean;
         }
         User user1 = this.userService.queryByName(username);
-        if(user == null){
+        if(user1 == null){
             jsonBean.setStatus(-1);
             jsonBean.setMsg("该用户未注册");
             return jsonBean;
         }
-        else if(!user.getPassword().equals(password)){
+        else if(!user1.getPassword().equals(password)){
             jsonBean.setStatus(-1);
             jsonBean.setMsg("密码错误");
             return jsonBean;
         }
         session.setAttribute("user",user.getUsername());
         jsonBean.setStatus(0);
-        jsonBean.setObj(user);
         jsonBean.setMsg("登录成功");
         System.out.println("登录成功");
         return jsonBean;
