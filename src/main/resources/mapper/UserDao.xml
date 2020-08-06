@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ctgu.carsale.dao.UserDao">
+
+    <resultMap type="com.ctgu.carsale.entity.User" id="UserMap">
+        <result property="userid" column="userId" jdbcType="VARCHAR"/>
+        <result property="password" column="password" jdbcType="VARCHAR"/>
+        <result property="username" column="userName" jdbcType="VARCHAR"/>
+        <result property="usersex" column="userSex" jdbcType="INTEGER"/>
+        <result property="userimg" column="userImg" jdbcType="OTHER"/>
+        <result property="deltag" column="delTag" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="UserMap">
+        select
+          userId, userName, userSex, userImg, delTag
+        from elm.user
+        where userId = #{userid}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="UserMap">
+        select
+          userId, userName, userSex, userImg, delTag
+        from elm.user
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="UserMap">
+        select
+          userId, userName, userSex, userImg, delTag
+        from elm.user
+        <where>
+            <if test="userid != null and userid != ''">
+                and userId = #{userid}
+            </if>
+            <if test="username != null and username != ''">
+                and userName = #{username}
+            </if>
+            <if test="usersex != null">
+                and userSex = #{usersex}
+            </if>
+            <if test="userimg != null">
+                and userImg = #{userimg}
+            </if>
+            <if test="deltag != null">
+                and delTag = #{deltag}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="userid" useGeneratedKeys="true">
+        insert into elm.user(password, userName, userSex, userImg, delTag)
+        values (#{password}, #{username}, #{usersex}, #{userimg}, #{deltag})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update elm.user
+        <set>
+            <if test="password != null and password != ''">
+                password = #{password},
+            </if>
+            <if test="username != null and username != ''">
+                userName = #{username},
+            </if>
+            <if test="usersex != null">
+                userSex = #{usersex},
+            </if>
+            <if test="userimg != null">
+                userImg = #{userimg},
+            </if>
+            <if test="deltag != null">
+                delTag = #{deltag},
+            </if>
+        </set>
+        where userId = #{userid}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from elm.user where userId = #{userid}
+    </delete>
+
+    <!--    通过姓名查询用户-->
+    <select id="queryByName" resultMap="UserMap" parameterType="String">
+        select
+            userId, password, userName, userSex, userImg, delTag
+        from elm.user
+        where userName = #{username}
+    </select>
+</mapper>
