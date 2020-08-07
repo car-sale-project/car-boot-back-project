@@ -57,4 +57,7 @@ public interface UserService {
 
     /**查询是否已经注册**/
     User queryByPhone(User user);
+
+    /**获取所有用户**/
+    List<User> getUserList();
 }

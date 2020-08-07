@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ctgu.carsale.dao.CarDao">
+
+    <resultMap type="com.ctgu.carsale.entity.Car" id="CarMap">
+        <result property="carid" column="carId" jdbcType="INTEGER"/>
+        <result property="carname" column="carName" jdbcType="VARCHAR"/>
+        <result property="carbrand" column="carBrand" jdbcType="VARCHAR"/>
+        <result property="carstock" column="carStock" jdbcType="INTEGER"/>
+        <result property="carimg" column="carImg" jdbcType="OTHER"/>
+        <result property="carprice" column="carPrice" jdbcType="NUMERIC"/>
+        <result property="carmodel" column="carModel" jdbcType="VARCHAR"/>
+        <result property="carnote" column="carNote" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="CarMap">
+        select
+          carId, carName, carBrand, carStock, carImg, carPrice, carModel, carNote
+        from car
+        where carId = #{carid}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="CarMap">
+        select
+          carId, carName, carBrand, carStock, carImg, carPrice, carModel, carNote
+        from car
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="CarMap">
+        select
+          carId, carName, carBrand, carStock, carImg, carPrice, carModel, carNote
+        from car
+        <where>
+            <if test="carid != null">
+                and carId = #{carid}
+            </if>
+            <if test="carname != null and carname != ''">
+                and carName = #{carname}
+            </if>
+            <if test="carbrand != null and carbrand != ''">
+                and carBrand = #{carbrand}
+            </if>
+            <if test="carstock != null">
+                and carStock = #{carstock}
+            </if>
+            <if test="carimg != null">
+                and carImg = #{carimg}
+            </if>
+            <if test="carprice != null">
+                and carPrice = #{carprice}
+            </if>
+            <if test="carmodel != null and carmodel != ''">
+                and carModel = #{carmodel}
+            </if>
+            <if test="carnote != null and carnote != ''">
+                and carNote = #{carnote}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="carid" useGeneratedKeys="true">
+        insert into car(carName, carBrand, carStock, carImg, carPrice, carModel, carNote)
+        values (#{carname}, #{carbrand}, #{carstock}, #{carimg}, #{carprice}, #{carmodel}, #{carnote})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update car
+        <set>
+            <if test="carname != null and carname != ''">
+                carName = #{carname},
+            </if>
+            <if test="carbrand != null and carbrand != ''">
+                carBrand = #{carbrand},
+            </if>
+            <if test="carstock != null">
+                carStock = #{carstock},
+            </if>
+            <if test="carimg != null">
+                carImg = #{carimg},
+            </if>
+            <if test="carprice != null">
+                carPrice = #{carprice},
+            </if>
+            <if test="carmodel != null and carmodel != ''">
+                carModel = #{carmodel},
+            </if>
+            <if test="carnote != null and carnote != ''">
+                carNote = #{carnote},
+            </if>
+        </set>
+        where carId = #{carid}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from car where carId = #{carid}
+    </delete>
+
+    <!-- 查询所有汽车-->
+    <select id="getCarList" resultMap="CarMap">
+        select
+            carId, carName, carBrand, carStock, carImg, carPrice, carModel, carNote
+        from car
+        order by carId
+    </select>
+
+    <!-- 模糊查询，通过车名或者品牌搜索-->
+    <select id="search" parameterType="String" resultMap="CarMap">
+        select
+            carId, carName, carBrand, carStock, carImg, carPrice, carModel, carNote
+        from car
+        where carName like concat('%',#{carname},'%')
+             or carBrand like concat('%',#{carname},'%')
+    </select>
+
+</mapper>

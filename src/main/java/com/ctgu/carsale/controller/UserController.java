@@ -42,13 +42,23 @@ public class UserController {
         User existUser = this.userService.checkUser(user);
         if(existUser == null){
             jsonBean.setStatus(-1);
-            jsonBean.setMsg("登录失败");
+            jsonBean.setMsg("用户名或密码错误，请重新输入");
             return jsonBean;
+        }
+        else if (existUser != null){
+            if (existUser.getDeltag()==0){
+                jsonBean.setStatus(-1);
+                jsonBean.setMsg("该用户已被封禁，请联系管理员解封");
+                return jsonBean;
+            }
         }
         jsonBean.setStatus(0);
         jsonBean.setMsg("登录成功");
         jsonBean.setObj(existUser);
         session.setAttribute("user",existUser);
+
+        User user1 = (User)session.getAttribute("user");
+        System.out.println(user1.toString());
         return jsonBean;
     }
 
@@ -71,9 +81,18 @@ public class UserController {
 
     /**登录状态获取个人信息**/
     @RequestMapping(value = "get_user_info",method = RequestMethod.POST)
-    public User getUserInfo(HttpSession session){
+    public JsonBean getUserInfo(HttpSession session){
+        JsonBean jsonBean = new JsonBean();
         User user = (User)session.getAttribute("userId");
-        return user;
+        if(user == null){
+            jsonBean.setStatus(-1);
+            jsonBean.setMsg("用户未登录");
+            return jsonBean;
+        }
+        jsonBean.setStatus(0);
+        jsonBean.setMsg("请求成功");
+        jsonBean.setObj(user);
+        return jsonBean;
     }
 
     /**修改个人信息**/
@@ -88,4 +107,6 @@ public class UserController {
         session.removeAttribute("user");
         return 0;
     }
+
+
 }

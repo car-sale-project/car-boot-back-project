@@ -16,14 +16,14 @@
     <select id="queryById" resultMap="UserMap">
         select
           userId, userPassword, userAddress, userPhone, delTag, userName, gender
-        from carsale.user
+        from user
         where userId = #{userid}
     </select>
 
     <!--查询指定行数据-->
     <select id="queryAllByLimit" resultMap="UserMap">
         select
-          userId, userPassword, userAddress, userPhone, delTag, userName, gender
+          userId, userPassword, userAddress, userPhone,  userName, gender
         from user
         limit #{offset}, #{limit}
     </select>
@@ -101,11 +101,19 @@
         where userName = #{username} and userPassword = #{userpassword}
     </select>
 
-
+    <!--    注册校验-->
     <select id="queryByPhone" resultMap="UserMap">
         select
             userId, userAddress, userPhone, delTag, userName, gender
         from user
         where userName = #{username} and userPhone = #{userphone}
+    </select>
+
+    <!--    查询所有用户-->
+    <select id="getUserList" resultMap="UserMap">
+        select
+            userId, userPassword, userAddress, userPhone, delTag, userName, gender
+        from user
+        order by userId;
     </select>
 </mapper>

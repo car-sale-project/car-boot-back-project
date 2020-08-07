@@ -1,24 +1,25 @@
 package com.ctgu.carsale.dao;
 
-import com.ctgu.carsale.entity.User;
+import com.ctgu.carsale.entity.Car;
 import org.apache.ibatis.annotations.Param;
 import java.util.List;
+import java.util.Map;
 
 /**
- * (User)表数据库访问层
+ * (Car)表数据库访问层
  *
  * @author makejava
- * @since 2020-08-07 11:58:45
+ * @since 2020-08-07 21:34:43
  */
-public interface UserDao {
+public interface CarDao {
 
     /**
      * 通过ID查询单条数据
      *
-     * @param userid 主键
+     * @param carid 主键
      * @return 实例对象
      */
-    User queryById(Long userid);
+    Car queryById(Integer carid);
 
     /**
      * 查询指定行数据
@@ -27,47 +28,45 @@ public interface UserDao {
      * @param limit 查询条数
      * @return 对象列表
      */
-    List<User> queryAllByLimit(@Param("offset") int offset, @Param("limit") int limit);
+    List<Car> queryAllByLimit(@Param("offset") int offset, @Param("limit") int limit);
 
 
     /**
      * 通过实体作为筛选条件查询
      *
-     * @param user 实例对象
+     * @param car 实例对象
      * @return 对象列表
      */
-    List<User> queryAll(User user);
+    List<Car> queryAll(Car car);
 
     /**
      * 新增数据
      *
-     * @param user 实例对象
+     * @param car 实例对象
      * @return 影响行数
      */
-    int insert(User user);
+    int insert(Car car);
 
     /**
      * 修改数据
      *
-     * @param user 实例对象
+     * @param car 实例对象
      * @return 影响行数
      */
-    int update(User user);
+    int update(Car car);
 
     /**
      * 通过主键删除数据
      *
-     * @param userid 主键
+     * @param carid 主键
      * @return 影响行数
      */
-    int deleteById(Long userid);
+    int deleteById(Integer carid);
 
-    /**登录校验**/
-    User checkUser(User user);
+    /**查询所有车辆信息**/
+    List<Car> getCarList();
 
-    /**注册校验**/
-    User queryByPhone(User user);
+    /**搜索框查询符合条件的车**/
+    List<Car> search(String carname);
 
-    /**获取所有用户**/
-    List<User> getUserList();
 }
