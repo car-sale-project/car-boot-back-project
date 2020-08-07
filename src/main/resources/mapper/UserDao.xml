@@ -3,78 +3,88 @@
 <mapper namespace="com.ctgu.carsale.dao.UserDao">
 
     <resultMap type="com.ctgu.carsale.entity.User" id="UserMap">
-        <result property="userid" column="userId" jdbcType="VARCHAR"/>
-        <result property="password" column="password" jdbcType="VARCHAR"/>
-        <result property="username" column="userName" jdbcType="VARCHAR"/>
-        <result property="usersex" column="userSex" jdbcType="INTEGER"/>
-        <result property="userimg" column="userImg" jdbcType="OTHER"/>
+        <result property="userid" column="userId" jdbcType="INTEGER"/>
+        <result property="userpassword" column="userPassword" jdbcType="VARCHAR"/>
+        <result property="useraddress" column="userAddress" jdbcType="VARCHAR"/>
+        <result property="userphone" column="userPhone" jdbcType="VARCHAR"/>
         <result property="deltag" column="delTag" jdbcType="INTEGER"/>
+        <result property="username" column="userName" jdbcType="VARCHAR"/>
+        <result property="gender" column="gender" jdbcType="VARCHAR"/>
     </resultMap>
 
     <!--查询单个-->
     <select id="queryById" resultMap="UserMap">
         select
-          userId, userName, userSex, userImg, delTag
-        from elm.user
+          userId, userPassword, userAddress, userPhone, delTag, userName, gender
+        from carsale.user
         where userId = #{userid}
     </select>
 
     <!--查询指定行数据-->
     <select id="queryAllByLimit" resultMap="UserMap">
         select
-          userId, userName, userSex, userImg, delTag
-        from elm.user
+          userId, userPassword, userAddress, userPhone, delTag, userName, gender
+        from carsale.user
         limit #{offset}, #{limit}
     </select>
 
     <!--通过实体作为筛选条件查询-->
     <select id="queryAll" resultMap="UserMap">
         select
-          userId, userName, userSex, userImg, delTag
-        from elm.user
+          userId, userPassword, userAddress, userPhone, delTag, userName, gender
+        from carsale.user
         <where>
-            <if test="userid != null and userid != ''">
+            <if test="userid != null">
                 and userId = #{userid}
+            </if>
+            <if test="userpassword != null and userpassword != ''">
+                and userPassword = #{userpassword}
+            </if>
+            <if test="useraddress != null and useraddress != ''">
+                and userAddress = #{useraddress}
+            </if>
+            <if test="userphone != null and userphone != ''">
+                and userPhone = #{userphone}
+            </if>
+            <if test="deltag != null">
+                and delTag = #{deltag}
             </if>
             <if test="username != null and username != ''">
                 and userName = #{username}
             </if>
-            <if test="usersex != null">
-                and userSex = #{usersex}
-            </if>
-            <if test="userimg != null">
-                and userImg = #{userimg}
-            </if>
-            <if test="deltag != null">
-                and delTag = #{deltag}
+            <if test="gender != null and gender != ''">
+                and gender = #{gender}
             </if>
         </where>
     </select>
 
     <!--新增所有列-->
     <insert id="insert" keyProperty="userid" useGeneratedKeys="true">
-        insert into elm.user(password, userName, userSex, userImg, delTag)
-        values (#{password}, #{username}, #{usersex}, #{userimg}, #{deltag})
+        insert into carsale.user(userPassword, userAddress, userPhone, delTag, userName, gender)
+        values (#{userpassword}, #{useraddress}, #{userphone}, #{deltag}, #{username}, #{gender})
     </insert>
 
     <!--通过主键修改数据-->
     <update id="update">
-        update elm.user
+        update carsale.user
         <set>
-            <if test="password != null and password != ''">
-                password = #{password},
+            <if test="userpassword != null and userpassword != ''">
+                userPassword = #{userpassword},
+            </if>
+            <if test="useraddress != null and useraddress != ''">
+                userAddress = #{useraddress},
+            </if>
+            <if test="userphone != null and userphone != ''">
+                userPhone = #{userphone},
+            </if>
+            <if test="deltag != null">
+                delTag = #{deltag},
             </if>
             <if test="username != null and username != ''">
                 userName = #{username},
             </if>
-            <if test="usersex != null">
-                userSex = #{usersex},
-            </if>
-            <if test="userimg != null">
-                userImg = #{userimg},
-            </if>
-            <if test="deltag != null">
-                delTag = #{deltag},
+            <if test="gender != null and gender != ''">
+                gender = #{gender},
             </if>
         </set>
         where userId = #{userid}
@@ -82,14 +92,13 @@
 
     <!--通过主键删除-->
     <delete id="deleteById">
-        delete from elm.user where userId = #{userid}
+        delete from carsale.user where userId = #{userid}
     </delete>
 
-    <!--    通过姓名查询用户-->
-    <select id="queryByName" resultMap="UserMap" parameterType="String">
+    <select id="queryByName" resultMap="UserMap">
         select
-            userId, userName, password, userSex, userImg, delTag
-        from elm.user
-        where userName = #{username}
+            userId, userAddress, userPhone, delTag, userName, gender
+        from carsale.user
+        where userName = #{username} and userPassword = #{userpassword}
     </select>
 </mapper>

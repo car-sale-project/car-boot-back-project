@@ -1,4 +1,4 @@
-package com.ctgu.carsale.service.Impl;
+package com.ctgu.carsale.service.impl;
 
 import com.ctgu.carsale.entity.User;
 import com.ctgu.carsale.dao.UserDao;
@@ -12,7 +12,7 @@ import java.util.List;
  * (User)表服务实现类
  *
  * @author makejava
- * @since 2020-08-06 13:51:29
+ * @since 2020-08-07 11:58:45
  */
 @Service("userService")
 public class UserServiceImpl implements UserService {
@@ -26,7 +26,7 @@ public class UserServiceImpl implements UserService {
      * @return 实例对象
      */
     @Override
-    public User queryById(String userid) {
+    public User queryById(Long userid) {
         return this.userDao.queryById(userid);
     }
 
@@ -73,18 +73,12 @@ public class UserServiceImpl implements UserService {
      * @return 是否成功
      */
     @Override
-    public boolean deleteById(String userid) {
+    public boolean deleteById(Long userid) {
         return this.userDao.deleteById(userid) > 0;
     }
 
-    /**
-     * 通过姓名查询用户
-     *
-     * @param username
-     * @return 影响行数
-     */
     @Override
-    public User queryByName(String username) {
-        return this.userDao.queryByName(username);
+    public User queryByName(User user) {
+        return this.userDao.queryByName(user);
     }
 }

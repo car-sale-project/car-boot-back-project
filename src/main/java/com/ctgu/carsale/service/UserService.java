@@ -1,17 +1,14 @@
 package com.ctgu.carsale.service;
 
 import com.ctgu.carsale.entity.User;
-import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 /**
  * (User)表服务接口
  *
  * @author makejava
- * @since 2020-08-06 13:51:29
+ * @since 2020-08-07 11:58:45
  */
-@Service
 public interface UserService {
 
     /**
@@ -20,7 +17,7 @@ public interface UserService {
      * @param userid 主键
      * @return 实例对象
      */
-    User queryById(String userid);
+    User queryById(Long userid);
 
     /**
      * 查询多条数据
@@ -53,13 +50,7 @@ public interface UserService {
      * @param userid 主键
      * @return 是否成功
      */
-    boolean deleteById(String userid);
+    boolean deleteById(Long userid);
 
-    /**
-     * 通过姓名查询用户
-     *
-     * @param username 用户名
-     * @return 实例对象
-     */
-    User queryByName(String username);
+    User queryByName(User user);
 }

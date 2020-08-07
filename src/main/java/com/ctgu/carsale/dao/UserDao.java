@@ -8,7 +8,7 @@ import java.util.List;
  * (User)表数据库访问层
  *
  * @author makejava
- * @since 2020-08-06 13:51:29
+ * @since 2020-08-07 11:58:45
  */
 public interface UserDao {
 
@@ -18,7 +18,7 @@ public interface UserDao {
      * @param userid 主键
      * @return 实例对象
      */
-    User queryById(String userid);
+    User queryById(Long userid);
 
     /**
      * 查询指定行数据
@@ -60,14 +60,7 @@ public interface UserDao {
      * @param userid 主键
      * @return 影响行数
      */
-    int deleteById(String userid);
+    int deleteById(Long userid);
 
-    /**
-     * 通过姓名查询用户
-     *
-     * @param username
-     * @return 影响行数
-     */
-    User queryByName(String username);
-
+    User queryByName(User user);
 }

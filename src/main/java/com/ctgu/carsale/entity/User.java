@@ -1,54 +1,83 @@
 package com.ctgu.carsale.entity;
+
 import java.io.Serializable;
 
 /**
  * (User)实体类
  *
  * @author makejava
- * @since 2020-08-06 13:51:29
+ * @since 2020-08-07 11:58:45
  */
 public class User implements Serializable {
-    private static final long serialVersionUID = 103144418911767927L;
+    private static final long serialVersionUID = 700073171011774805L;
     /**
-    * 用户编号
+    * 用户id
     */
-    private String userid;
+    private Long userid;
     /**
     * 密码
     */
-    private String password;
+    private String userpassword;
     /**
-    * 用户名称
+    * 地址
     */
-    private String username;
+    private String useraddress;
     /**
-    * 用户性别（1：男； 0：女）
+    * 联系方式
     */
-    private Integer usersex;
-    /**
-    * 用户头像
-    */
-    private Object userimg;
+    private String userphone;
     /**
     * 删除标记（1：正常； 0：删除）
     */
     private Integer deltag;
+    /**
+    * 用户名
+    */
+    private String username;
+    /**
+    * 性别
+    */
+    private String gender;
 
 
-    public String getUserid() {
+    public Long getUserid() {
         return userid;
     }
 
-    public void setUserid(String userid) {
+    public void setUserid(Long userid) {
         this.userid = userid;
     }
 
-    public String getPassword() {
-        return password;
+    public String getUserpassword() {
+        return userpassword;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setUserpassword(String userpassword) {
+        this.userpassword = userpassword;
+    }
+
+    public String getUseraddress() {
+        return useraddress;
+    }
+
+    public void setUseraddress(String useraddress) {
+        this.useraddress = useraddress;
+    }
+
+    public String getUserphone() {
+        return userphone;
+    }
+
+    public void setUserphone(String userphone) {
+        this.userphone = userphone;
+    }
+
+    public Integer getDeltag() {
+        return deltag;
+    }
+
+    public void setDeltag(Integer deltag) {
+        this.deltag = deltag;
     }
 
     public String getUsername() {
@@ -59,28 +88,12 @@ public class User implements Serializable {
         this.username = username;
     }
 
-    public Integer getUsersex() {
-        return usersex;
+    public String getGender() {
+        return gender;
     }
 
-    public void setUsersex(Integer usersex) {
-        this.usersex = usersex;
-    }
-
-    public Object getUserimg() {
-        return userimg;
-    }
-
-    public void setUserimg(Object userimg) {
-        this.userimg = userimg;
-    }
-
-    public Integer getDeltag() {
-        return deltag;
-    }
-
-    public void setDeltag(Integer deltag) {
-        this.deltag = deltag;
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 
 }
