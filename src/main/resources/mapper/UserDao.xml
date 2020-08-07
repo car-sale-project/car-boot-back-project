@@ -95,10 +95,19 @@
         delete from carsale.user where userId = #{userid}
     </delete>
 
-    <select id="queryByName" resultMap="UserMap">
+    <!--  检测登录是否正确  -->
+    <select id="checkUser" resultMap="UserMap">
         select
             userId, userAddress, userPhone, delTag, userName, gender
         from carsale.user
         where userName = #{username} and userPassword = #{userpassword}
+    </select>
+
+
+    <select id="queryByPhone" resultMap="UserMap">
+        select
+            userId, userAddress, userPhone, delTag, userName, gender
+        from carsale.user
+        where userName = #{username} and userPhone = #{userphone}
     </select>
 </mapper>

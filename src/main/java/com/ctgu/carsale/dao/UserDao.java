@@ -62,5 +62,9 @@ public interface UserDao {
      */
     int deleteById(Long userid);
 
-    User queryByName(User user);
+    /**登录校验**/
+    User checkUser(User user);
+
+    /**注册校验**/
+    User queryByPhone(User user);
 }

@@ -78,7 +78,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User queryByName(User user) {
-        return this.userDao.queryByName(user);
+    public User checkUser(User user) {
+        return this.userDao.checkUser(user);
+    }
+
+    @Override
+    public User queryByPhone(User user) {
+        return this.userDao.queryByPhone(user);
     }
 }

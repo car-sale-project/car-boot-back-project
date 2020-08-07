@@ -52,5 +52,9 @@ public interface UserService {
      */
     boolean deleteById(Long userid);
 
-    User queryByName(User user);
+    /**登录验证**/
+    User checkUser(User user);
+
+    /**查询是否已经注册**/
+    User queryByPhone(User user);
 }
