@@ -40,11 +40,6 @@ public class UserController {
         return "Hello";
     }
 
-    @RequestMapping("test1")
-    public void getData(String username) {
-        System.out.println(username);
-    }
-
     /**
      * 登录
      *
@@ -88,8 +83,8 @@ public class UserController {
      * @param user 用户对象
      * @return JsonBean
      */
-    @PostMapping("register.do")
-    public JsonBean register(@ModelAttribute User user){
+    @PostMapping("register")
+    public JsonBean register(User user){
         JsonBean jsonBean = new JsonBean();
         User user1 = this.userService.queryByName(user.getUsername());
         if(user1 == null){
