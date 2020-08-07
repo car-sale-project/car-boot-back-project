@@ -77,8 +77,8 @@
             <if test="userphone != null and userphone != ''">
                 userPhone = #{userphone},
             </if>
-            <if test="deltag != null">
-                delTag = #{deltag},
+            <if test="deltag == null">
+                delTag = 1,
             </if>
             <if test="username != null and username != ''">
                 userName = #{username},
