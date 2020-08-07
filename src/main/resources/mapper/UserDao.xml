@@ -60,8 +60,8 @@
 
     <!--新增所有列-->
     <insert id="insert" keyProperty="userid" useGeneratedKeys="true">
-        insert into user(userPassword, userAddress, userPhone, delTag, userName, gender)
-        values (#{userpassword}, #{useraddress}, #{userphone}, #{deltag}, #{username}, #{gender})
+        insert into user(userPassword, userAddress, userPhone, userName, gender)
+        values (#{userpassword}, #{useraddress}, #{userphone},  #{username}, #{gender})
     </insert>
 
     <!--通过主键修改数据-->
@@ -77,9 +77,7 @@
             <if test="userphone != null and userphone != ''">
                 userPhone = #{userphone},
             </if>
-            <if test="deltag == null">
-                delTag = 1,
-            </if>
+
             <if test="username != null and username != ''">
                 userName = #{username},
             </if>
