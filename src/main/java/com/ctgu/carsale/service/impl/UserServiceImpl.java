@@ -3,6 +3,8 @@ package com.ctgu.carsale.service.impl;
 import com.ctgu.carsale.entity.User;
 import com.ctgu.carsale.dao.UserDao;
 import com.ctgu.carsale.service.UserService;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -91,4 +93,13 @@ public class UserServiceImpl implements UserService {
     public List<User> getUserList() {
         return this.userDao.getUserList();
     }
+
+    @Override
+    public PageInfo<User> getAllByPage(int page, int offset) {
+        PageHelper.startPage(page, offset);
+        List<User> all = this.userDao.getAllByPage();
+        return new PageInfo<User>(all);
+    }
+
+
 }

@@ -5,7 +5,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-@MapperScan("com.ctgu.carsale.dao")
+@MapperScan(basePackages = {"com.ctgu.carsale.dao","com.ctgu.carsale.mapper"})
 public class CarsaleApplication {
 
     public static void main(String[] args) {

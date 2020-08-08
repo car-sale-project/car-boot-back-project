@@ -1,6 +1,7 @@
 package com.ctgu.carsale.service;
 
 import com.ctgu.carsale.entity.Car;
+import com.github.pagehelper.PageInfo;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -61,4 +62,6 @@ public interface CarService {
 
     /**搜索框查询符合条件的车**/
     List<Car> search(String carname);
+
+    PageInfo<Car> getAllByPage(int page, int offset);
 }

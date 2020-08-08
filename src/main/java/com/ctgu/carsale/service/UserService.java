@@ -1,6 +1,8 @@
 package com.ctgu.carsale.service;
 
 import com.ctgu.carsale.entity.User;
+import com.github.pagehelper.PageInfo;
+
 import java.util.List;
 
 /**
@@ -60,4 +62,7 @@ public interface UserService {
 
     /**获取所有用户**/
     List<User> getUserList();
+
+    /**分页查询所有用户**/
+    PageInfo<User> getAllByPage(int page,int offset);
 }

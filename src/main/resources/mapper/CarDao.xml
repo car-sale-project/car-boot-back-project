@@ -119,4 +119,10 @@
              or carBrand like concat('%',#{carname},'%')
     </select>
 
+
+    <select id="getAllByPage" resultMap="CarMap">
+        select
+            carId, carName, carBrand, carStock, carImg, carPrice, carModel, carNote
+        from car
+    </select>
 </mapper>

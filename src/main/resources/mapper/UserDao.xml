@@ -109,11 +109,18 @@
         where userName = #{username} and userPhone = #{userphone}
     </select>
 
-    <!--    查询所有用户-->
+    <!--    管理员查询所有用户-->
     <select id="getUserList" resultMap="UserMap">
         select
             userId, userPassword, userAddress, userPhone, delTag, userName, gender
         from user
         order by userId;
+    </select>
+
+    <!--管理员分页查询所有用户-->
+    <select id="getAllByPage" resultMap="UserMap">
+        select
+            userId, userPassword, userAddress, userPhone, delTag, userName, gender
+        from user
     </select>
 </mapper>

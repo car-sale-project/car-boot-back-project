@@ -2,6 +2,7 @@ package com.ctgu.carsale.controller;
 
 import com.ctgu.carsale.entity.Car;
 import com.ctgu.carsale.service.CarService;
+import com.github.pagehelper.PageInfo;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -45,6 +46,13 @@ public class CarController {
     public List<Car> search(@RequestParam("carname") String carname){
 //        System.out.println(carname);
         return this.carService.search(carname);
+    }
+
+    /**分页查询所有汽车**/
+    @GetMapping("get_all_by_page")
+    @ResponseBody
+    public PageInfo<Car> findAllByPage(@RequestParam(value = "page",required = true) int page, @RequestParam(value = "offset",required = true) int offset){
+        return this.carService.getAllByPage(page,offset);
     }
 
 

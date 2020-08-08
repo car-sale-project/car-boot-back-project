@@ -3,7 +3,6 @@ package com.ctgu.carsale.dao;
 import com.ctgu.carsale.entity.Car;
 import org.apache.ibatis.annotations.Param;
 import java.util.List;
-import java.util.Map;
 
 /**
  * (Car)表数据库访问层
@@ -69,4 +68,6 @@ public interface CarDao {
     /**搜索框查询符合条件的车**/
     List<Car> search(String carname);
 
+    /**分页查询所有用户**/
+    List<Car> getAllByPage();
 }

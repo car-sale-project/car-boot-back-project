@@ -70,4 +70,7 @@ public interface UserDao {
 
     /**获取所有用户**/
     List<User> getUserList();
+
+    /**分页查询所有用户**/
+    List<User> getAllByPage();
 }

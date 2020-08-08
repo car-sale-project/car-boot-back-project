@@ -3,6 +3,7 @@ package com.ctgu.carsale.controller;
 import com.ctgu.carsale.entity.JsonBean;
 import com.ctgu.carsale.entity.User;
 import com.ctgu.carsale.service.UserService;
+import com.github.pagehelper.PageInfo;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -108,5 +109,11 @@ public class UserController {
         return 0;
     }
 
+    /**分页查询所有用户**/
+    @GetMapping("get_all_by_page")
+    @ResponseBody
+    public PageInfo<User> findAllByPage(@RequestParam(value = "page",required = true) int page, @RequestParam(value = "offset",required = true) int offset){
+        return this.userService.getAllByPage(page,offset);
+    }
 
 }
