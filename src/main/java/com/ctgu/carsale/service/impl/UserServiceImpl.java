@@ -101,5 +101,17 @@ public class UserServiceImpl implements UserService {
         return new PageInfo<User>(all);
     }
 
+    @Override
+    public User lock(User user) {
+        this.userDao.lock(user);
+        return this.queryById(user.getUserid());
+    }
+
+    @Override
+    public User unlock(User user) {
+        this.userDao.unlock(user);
+        return this.queryById(user.getUserid());
+    }
+
 
 }

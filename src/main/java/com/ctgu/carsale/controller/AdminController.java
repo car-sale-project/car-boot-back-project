@@ -61,5 +61,78 @@ public class AdminController {
         return this.carService.getAllByPage(page,offset);
     }
 
+    /**管理员封禁用户**/
+    @RequestMapping(value = "lock",method = RequestMethod.POST)
+    public JsonBean lock(User user){
+        JsonBean jsonBean = new JsonBean();
+        User user1 = this.userService.lock(user);
+        if (user1 == null){
+            jsonBean.setStatus(-1);
+            jsonBean.setMsg("封禁失败");
+            return jsonBean;
+        }
+        jsonBean.setStatus(0);
+        jsonBean.setMsg("封禁成功");
+        return jsonBean;
+    }
+
+    /**管理员解封用户**/
+    @RequestMapping(value = "unlock",method = RequestMethod.POST)
+    public JsonBean unlock(User user){
+        JsonBean jsonBean = new JsonBean();
+        User user1 = this.userService.unlock(user);
+        if (user1 == null){
+            jsonBean.setStatus(-1);
+            jsonBean.setMsg("解封失败");
+            return jsonBean;
+        }
+        jsonBean.setStatus(0);
+        jsonBean.setMsg("解封成功");
+        return jsonBean;
+    }
+
+    /**添加车辆**/
+    @RequestMapping(value = "insert_car",method = RequestMethod.POST)
+    public JsonBean insert(Car car){
+        JsonBean jsonBean = new JsonBean();
+        Car car1 = this.carService.insert(car);
+        if (car1 == null){
+            jsonBean.setStatus(-1);
+            jsonBean.setMsg("添加失败");
+            return jsonBean;
+        }
+        jsonBean.setStatus(0);
+        jsonBean.setMsg("添加成功");
+        return jsonBean;
+    }
+
+    /**从数据库删除车辆**/
+    @RequestMapping(value = "delete_by_id",method = RequestMethod.POST)
+    public JsonBean delete(Car car){
+        JsonBean jsonBean = new JsonBean();
+        if (!this.carService.deleteById(car.getCarid())) {
+            jsonBean.setStatus(-1);
+            jsonBean.setMsg("删除失败");
+            return jsonBean;
+        }
+        jsonBean.setStatus(0);
+        jsonBean.setMsg("删除成功");
+        return jsonBean;
+    }
+
+    /**修改车辆信息**/
+    @RequestMapping(value = "update_car",method = RequestMethod.POST)
+    public JsonBean update(Car car){
+        JsonBean jsonBean = new JsonBean();
+        Car car1 = this.carService.update(car);
+        if (car1 == null){
+            jsonBean.setStatus(-1);
+            jsonBean.setMsg("修改失败");
+            return jsonBean;
+        }
+        jsonBean.setStatus(0);
+        jsonBean.setMsg("修改成功");
+        return jsonBean;
+    }
 
 }

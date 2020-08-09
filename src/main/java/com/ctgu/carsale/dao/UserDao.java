@@ -73,4 +73,11 @@ public interface UserDao {
 
     /**分页查询所有用户**/
     List<User> getAllByPage();
+
+    /**封禁用户**/
+    int lock(User user);
+
+    /**解封用户**/
+    int unlock(User user);
+
 }

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ctgu.carsale.dao.CollectsDao">
+
+    <resultMap type="com.ctgu.carsale.entity.Collects" id="CollectsMap">
+        <result property="collectid" column="collectId" jdbcType="INTEGER"/>
+        <result property="userid" column="userId" jdbcType="INTEGER"/>
+        <result property="carid" column="carId" jdbcType="INTEGER"/>
+        <association property="user" javaType="com.ctgu.carsale.entity.User" column="userId" select="com.ctgu.carsale.dao.UserDao.queryById"/>
+        <association property="car" javaType="com.ctgu.carsale.entity.Car" select="com.ctgu.carsale.dao.CarDao.queryById" column="carId"/>
+    </resultMap>
+
+    <select id="collectsList" resultMap="CollectsMap">
+        select *
+        from collects
+        <where>
+            <if test="userid != null and userid != 0">
+                and userId = #{userid}
+            </if>
+<!--            <if test="carid != null and carid != 0">-->
+<!--                and carId = #{carid}-->
+<!--            </if>-->
+        </where>
+    </select>
+
+    <insert id="insertCollects" keyProperty="collectid" useGeneratedKeys="true">
+        insert into collects(userId, carId)
+        values (#{userid}, #{carid})
+    </insert>
+
+    <delete id="remove">
+        delete from collects where userId = #{userid} and carId = #{carid}
+    </delete>
+</mapper>

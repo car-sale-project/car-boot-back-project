@@ -59,14 +59,12 @@ public class UserController {
         session.setAttribute("user",existUser);
 
         User user1 = (User)session.getAttribute("user");
-        System.out.println(user1.toString());
         return jsonBean;
     }
 
     /**注册接口**/
     @RequestMapping(value = "register",method = RequestMethod.POST)
     public JsonBean register(User user){
-        System.out.println("注册接口调用");
         JsonBean jsonBean = new JsonBean();
         User existUser = this.userService.queryByPhone(user);
         if(existUser != null){
@@ -84,7 +82,7 @@ public class UserController {
     @RequestMapping(value = "get_user_info",method = RequestMethod.POST)
     public JsonBean getUserInfo(HttpSession session){
         JsonBean jsonBean = new JsonBean();
-        User user = (User)session.getAttribute("userId");
+        User user = (User)session.getAttribute("user");
         if(user == null){
             jsonBean.setStatus(-1);
             jsonBean.setMsg("用户未登录");

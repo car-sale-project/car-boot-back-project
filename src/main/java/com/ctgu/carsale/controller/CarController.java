@@ -1,6 +1,7 @@
 package com.ctgu.carsale.controller;
 
 import com.ctgu.carsale.entity.Car;
+import com.ctgu.carsale.entity.JsonBean;
 import com.ctgu.carsale.service.CarService;
 import com.github.pagehelper.PageInfo;
 import org.springframework.web.bind.annotation.*;
@@ -54,6 +55,5 @@ public class CarController {
     public PageInfo<Car> findAllByPage(@RequestParam(value = "page",required = true) int page, @RequestParam(value = "offset",required = true) int offset){
         return this.carService.getAllByPage(page,offset);
     }
-
 
 }

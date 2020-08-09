@@ -65,4 +65,10 @@ public interface UserService {
 
     /**分页查询所有用户**/
     PageInfo<User> getAllByPage(int page,int offset);
+
+    /**封禁用户**/
+    User lock(User user);
+
+    /**解封用户**/
+    User unlock(User user);
 }

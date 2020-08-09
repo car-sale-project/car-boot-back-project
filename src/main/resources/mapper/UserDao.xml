@@ -123,4 +123,14 @@
             userId, userPassword, userAddress, userPhone, delTag, userName, gender
         from user
     </select>
+
+    <!--封禁用户-->
+    <update id="lock">
+        update user set delTag = 0 where userId = #{userid}
+    </update>
+
+    <!--解封用户-->
+    <update id="unlock">
+        update user set delTag = 1 where userId = #{userid}
+    </update>
 </mapper>
