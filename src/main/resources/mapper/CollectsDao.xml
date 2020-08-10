@@ -6,12 +6,13 @@
         <result property="collectid" column="collectId" jdbcType="INTEGER"/>
         <result property="userid" column="userId" jdbcType="INTEGER"/>
         <result property="carid" column="carId" jdbcType="INTEGER"/>
-        <association property="user" javaType="com.ctgu.carsale.entity.User" column="userId" select="com.ctgu.carsale.dao.UserDao.queryById"/>
+<!--        <association property="user" javaType="com.ctgu.carsale.entity.User" column="userId" select="com.ctgu.carsale.dao.UserDao.queryById"/>-->
         <association property="car" javaType="com.ctgu.carsale.entity.Car" select="com.ctgu.carsale.dao.CarDao.queryById" column="carId"/>
     </resultMap>
 
-    <select id="collectsList" resultMap="CollectsMap">
-        select *
+
+    <select id="collectsList" resultType="Integer">
+        select carId
         from collects
         <where>
             <if test="userid != null and userid != 0">
@@ -31,4 +32,5 @@
     <delete id="remove">
         delete from collects where userId = #{userid} and carId = #{carid}
     </delete>
+
 </mapper>

@@ -23,17 +23,17 @@ public class Collects implements Serializable {
     */
     private Integer carid;
 
-    private User user;
+//    private User user;
 
     private Car car;
 
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
+//    public User getUser() {
+//        return user;
+//    }
+//
+//    public void setUser(User user) {
+//        this.user = user;
+//    }
 
     public Car getCar() {
         return car;

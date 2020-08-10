@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
-import java.util.Map;
 
 /**
  * (Car)表服务实现类
@@ -98,5 +97,10 @@ public class CarServiceImpl implements CarService {
         PageHelper.startPage(page, offset);
         List<Car> all = this.carDao.getAllByPage();
         return new PageInfo<Car>(all);
+    }
+
+    @Override
+    public List<Car> queryByIds(List<Integer> ids) {
+        return this.carDao.queryByIds(ids);
     }
 }

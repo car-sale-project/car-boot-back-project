@@ -58,7 +58,7 @@ public class UserController {
         jsonBean.setObj(existUser);
         session.setAttribute("user",existUser);
 
-        User user1 = (User)session.getAttribute("user");
+//        User user1 = (User)session.getAttribute("user");
         return jsonBean;
     }
 

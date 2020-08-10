@@ -5,7 +5,6 @@ import com.github.pagehelper.PageInfo;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * (Car)表服务接口
@@ -64,4 +63,8 @@ public interface CarService {
     List<Car> search(String carname);
 
     PageInfo<Car> getAllByPage(int page, int offset);
+
+    /**通过id查询多条数据
+     * @param ids**/
+    List<Car> queryByIds(List<Integer> ids);
 }

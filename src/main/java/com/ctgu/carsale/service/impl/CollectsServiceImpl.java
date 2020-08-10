@@ -24,14 +24,14 @@ public class CollectsServiceImpl implements CollectsService {
     CollectsMapper collectsMapper;
 
     @Override
-    public List<Collects> collectsList(Collects collects) {
+    public List<Integer> collectsList(Collects collects) {
         return this.collectsDao.collectsList(collects);
     }
 
     @Override
-    public boolean inCollects(Collects collects){
+    public boolean inCollects(Collects collects) {
         Collects collects1 = this.collectsMapper.inCollects(collects);
-        if(collects1 == null){
+        if (collects1 == null) {
             return false;
         }
         return true;
@@ -47,4 +47,6 @@ public class CollectsServiceImpl implements CollectsService {
     public boolean remove(Collects collects) {
         return this.collectsDao.remove(collects) > 0;
     }
+
+
 }

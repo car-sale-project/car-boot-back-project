@@ -11,7 +11,8 @@ import java.util.List;
  * @since 2020-08-08 15:21:08
  */
 public interface CollectsDao {
-    List<Collects> collectsList(Collects collects);
+    List<Integer> collectsList(Collects collects);
     int insertCollects(Collects collects);
     int remove(Collects collects);
+    Collects collectsListDetail(Collects collects);
 }

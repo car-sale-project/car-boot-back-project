@@ -1,6 +1,7 @@
 package com.ctgu.carsale.dao;
 
 import com.ctgu.carsale.entity.Car;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
@@ -70,4 +71,8 @@ public interface CarDao {
 
     /**分页查询所有用户**/
     List<Car> getAllByPage();
+
+    /**通过id查询多条数据
+     * @param ids**/
+    List<Car> queryByIds(List<Integer> ids);
 }

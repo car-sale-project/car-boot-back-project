@@ -14,7 +14,7 @@ import java.util.List;
  */
 @Service
 public interface CollectsService {
-    List<Collects> collectsList(Collects collects);
+    List<Integer> collectsList(Collects collects);
     boolean inCollects(Collects collects);
     Collects insertCollects(Collects collects);
     boolean remove(Collects collects);
