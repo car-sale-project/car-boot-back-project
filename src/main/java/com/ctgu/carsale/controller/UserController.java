@@ -108,7 +108,7 @@ public class UserController {
     }
 
     /**分页查询所有用户**/
-    @GetMapping("get_all_by_page")
+    @RequestMapping(value = "get_all_by_page",method = RequestMethod.POST)
     @ResponseBody
     public PageInfo<User> findAllByPage(@RequestParam(value = "page",required = true) int page, @RequestParam(value = "offset",required = true) int offset){
         return this.userService.getAllByPage(page,offset);
