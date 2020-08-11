@@ -4,6 +4,7 @@ import com.ctgu.carsale.entity.JsonBean;
 import com.ctgu.carsale.entity.User;
 import com.ctgu.carsale.service.UserService;
 import com.github.pagehelper.PageInfo;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -46,7 +47,7 @@ public class UserController {
             jsonBean.setMsg("用户名或密码错误，请重新输入");
             return jsonBean;
         }
-        else if (existUser != null){
+        else {
             if (existUser.getDeltag()==0){
                 jsonBean.setStatus(-1);
                 jsonBean.setMsg("该用户已被封禁，请联系管理员解封");
@@ -63,6 +64,7 @@ public class UserController {
     }
 
     /**注册接口**/
+    @Transactional
     @RequestMapping(value = "register",method = RequestMethod.POST)
     public JsonBean register(User user){
         JsonBean jsonBean = new JsonBean();
@@ -95,6 +97,7 @@ public class UserController {
     }
 
     /**修改个人信息**/
+    @Transactional
     @RequestMapping(value = "update_information",method = RequestMethod.POST)
     public User update_information(User user){
         return this.userService.update(user);
@@ -110,7 +113,7 @@ public class UserController {
     /**分页查询所有用户**/
     @RequestMapping(value = "get_all_by_page",method = RequestMethod.POST)
     @ResponseBody
-    public PageInfo<User> findAllByPage(@RequestParam(value = "page",required = true) int page, @RequestParam(value = "offset",required = true) int offset){
+    public PageInfo<User> findAllByPage(@RequestParam(value = "page") int page, @RequestParam(value = "offset") int offset){
         return this.userService.getAllByPage(page,offset);
     }
 

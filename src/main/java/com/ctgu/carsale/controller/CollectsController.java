@@ -7,6 +7,7 @@ import com.ctgu.carsale.mapper.CollectsMapper;
 import com.ctgu.carsale.service.CarService;
 import com.ctgu.carsale.service.CollectsService;
 import org.apache.ibatis.annotations.Insert;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -75,10 +76,11 @@ public class CollectsController {
     }
 
     /**从收藏列表移除**/
+    @Transactional
     @RequestMapping(value = "remove",method = RequestMethod.POST)
     public JsonBean remove(Collects collects){
         JsonBean jsonBean = new JsonBean();
-        Boolean tag = this.collectsService.remove(collects);
+        boolean tag = this.collectsService.remove(collects);
         if (!tag){
             jsonBean.setStatus(-1);
             jsonBean.setMsg("移除失败");
