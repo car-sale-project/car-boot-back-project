@@ -25,15 +25,9 @@ public class CarController {
     @Resource
     private CarService carService;
 
-    /**
-     * 通过主键查询单条数据
-     *
-     * @param id 主键
-     * @return 单条数据
-     */
-    @GetMapping("selectOne")
-    public Car selectOne(Integer id) {
-        return this.carService.queryById(id);
+    @GetMapping("detail")
+    public Car selectOne(Car car) {
+        return this.carService.queryById(car.getCarid());
     }
 
     /**查询所有车辆信息**/

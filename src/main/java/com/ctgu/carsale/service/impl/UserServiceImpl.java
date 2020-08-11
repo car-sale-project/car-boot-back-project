@@ -52,6 +52,7 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public User insert(User user) {
+        String psw = user.getUserpassword();
         this.userDao.insert(user);
         return user;
     }
@@ -112,6 +113,5 @@ public class UserServiceImpl implements UserService {
         this.userDao.unlock(user);
         return this.queryById(user.getUserid());
     }
-
 
 }

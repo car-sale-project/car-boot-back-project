@@ -123,4 +123,5 @@ public class CollectsController {
         jsonBean.setObj(cars);
         return jsonBean;
     }
+
 }
