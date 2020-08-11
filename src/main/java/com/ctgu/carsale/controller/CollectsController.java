@@ -110,7 +110,17 @@ public class CollectsController {
 
     /**获取收藏汽车列表**/
     @RequestMapping(value = "get_collects_list_by_userid",method = RequestMethod.POST)
-    public List<Car> test(Collects collects){
-        return this.collectsMapper.carList(collects);
+    public JsonBean test(Collects collects){
+        JsonBean jsonBean = new JsonBean();
+        List<Car> cars = this.collectsMapper.carList(collects);
+        if (cars.size() == 0){
+            jsonBean.setStatus(-1);
+            jsonBean.setMsg("未收藏");
+            return jsonBean;
+        }
+        jsonBean.setStatus(0);
+        jsonBean.setMsg("返回数据");
+        jsonBean.setObj(cars);
+        return jsonBean;
     }
 }
