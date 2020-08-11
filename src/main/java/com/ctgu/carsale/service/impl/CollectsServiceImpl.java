@@ -23,10 +23,10 @@ public class CollectsServiceImpl implements CollectsService {
     @Resource
     CollectsMapper collectsMapper;
 
-    @Override
-    public List<Integer> collectsList(Collects collects) {
-        return this.collectsDao.collectsList(collects);
-    }
+//    @Override
+//    public List<Integer> collectsList(Collects collects) {
+//        return this.collectsDao.collectsList(collects);
+//    }
 
     @Override
     public boolean inCollects(Collects collects) {

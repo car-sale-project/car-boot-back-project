@@ -35,22 +35,22 @@ public class CollectsController {
     private CarService carService;
 
     /**获取收藏列表**/
-    @RequestMapping(value = "get_collects_list_by_userid",method = RequestMethod.POST)
-    public JsonBean getCollectList(Collects collects){
-        JsonBean jsonBean = new JsonBean();
-        List<Collects> collects1 = this.collectsMapper.userInCollects(collects);
-        if (collects1.size() == 0){
-            jsonBean.setStatus(-1);
-            jsonBean.setMsg("该用户还未进行收藏");
-            return jsonBean;
-        }
-        List<Integer> ids = this.collectsService.collectsList(collects);
-        List<Car> cars = this.carService.queryByIds(ids);
-        jsonBean.setStatus(0);
-        jsonBean.setMsg("返回收藏数据");
-        jsonBean.setObj(cars);
-        return jsonBean;
-    }
+//    @RequestMapping(value = "get_collects_list_by_userid",method = RequestMethod.POST)
+//    public JsonBean getCollectList(Collects collects){
+//        JsonBean jsonBean = new JsonBean();
+//        List<Collects> collects1 = this.collectsMapper.userInCollects(collects);
+//        if (collects1.size() == 0){
+//            jsonBean.setStatus(-1);
+//            jsonBean.setMsg("该用户还未进行收藏");
+//            return jsonBean;
+//        }
+//        List<Integer> ids = this.collectsService.collectsList(collects);
+//        List<Car> cars = this.carService.queryByIds(ids);
+//        jsonBean.setStatus(0);
+//        jsonBean.setMsg("返回收藏数据");
+//        jsonBean.setObj(cars);
+//        return jsonBean;
+//    }
 
     /**根据汽车id和用户id判断汽车在不在收藏列表**/
     @RequestMapping(value = "in_collects",method = RequestMethod.POST)
@@ -108,4 +108,9 @@ public class CollectsController {
         return jsonBean;
     }
 
+    /**获取收藏汽车列表**/
+    @RequestMapping(value = "get_collects_list_by_userid",method = RequestMethod.POST)
+    public List<Car> test(Collects collects){
+        return this.collectsMapper.carList(collects);
+    }
 }

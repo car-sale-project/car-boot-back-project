@@ -11,18 +11,18 @@
     </resultMap>
 
 
-    <select id="collectsList" resultType="Integer">
-        select carId
-        from collects
-        <where>
-            <if test="userid != null and userid != 0">
-                and userId = #{userid}
-            </if>
-<!--            <if test="carid != null and carid != 0">-->
-<!--                and carId = #{carid}-->
+<!--    <select id="collectsList" resultType="Integer">-->
+<!--        select carId-->
+<!--        from collects-->
+<!--        <where>-->
+<!--            <if test="userid != null and userid != 0">-->
+<!--                and userId = #{userid}-->
 <!--            </if>-->
-        </where>
-    </select>
+<!--&lt;!&ndash;            <if test="carid != null and carid != 0">&ndash;&gt;-->
+<!--&lt;!&ndash;                and carId = #{carid}&ndash;&gt;-->
+<!--&lt;!&ndash;            </if>&ndash;&gt;-->
+<!--        </where>-->
+<!--    </select>-->
 
     <insert id="insertCollects" keyProperty="collectid" useGeneratedKeys="true">
         insert into collects(userId, carId)
